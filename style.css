@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #000000, #3f4c6b);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: #00e5ff;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-out;
+    position: relative;
+    top: -150px;
+}
+
+#response {
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px #00e5ff;
+}
+
+button {
+    background: transparent;
+    border: 2px solid #00e5ff;
+    color: #00e5ff;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    z-index: 3;
+    font-family: 'Arial', sans-serif;
+    /* Optional: Add a different font for buttons */
+}
+
+button:hover {
+    background: #00e5ff;
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 1);
+    transform: scale(1.1);
+}
+
+.glowing-ring {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid #00e5ff;
+    opacity: 0.5;
+    margin-top: 30px;
+    animation: glowingRingAnimation 4s infinite ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0, 229, 255, 1);
+}
+
+@keyframes glowingRingAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* Hover Effect on Glowing Ring */
+.glowing-ring:hover {
+    opacity: 1;
+    box-shadow: 0 0 60px rgba(0, 229, 255, 1);
+}
+
+/* Fade-in effect for welcome text */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+        top: -10%;
+    }
+
+    #response {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+
+    .glowing-ring {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+        top: -100px;
+    }
+
+    #response {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+
+    .glowing-ring {
+        width: 200px;
+        height: 200px;
+    }
+}
