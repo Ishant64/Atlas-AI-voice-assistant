@@ -36,7 +36,7 @@ const COMMANDS = {
     response: `I was developed by ${AI_CONFIG.user}, a skilled software engineer specializing in intelligent systems.`,
   },
   time: {
-    patterns: [/current time|what time is it/i],
+    patterns: [/current time|time/i],
     response: () => {
       const time = new Date().toLocaleTimeString([], {
         hour: "2-digit",
