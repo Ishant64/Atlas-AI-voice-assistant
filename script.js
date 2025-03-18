@@ -35,6 +35,10 @@ const COMMANDS = {
     patterns: [/who created you|your developer/i],
     response: `I was developed by ${AI_CONFIG.user}, a skilled software engineer specializing in intelligent systems.`,
   },
+gps: {
+    patterns: [/navigate|goingto|dastination/i],
+    response: `https://www.google.com/maps/search?q=${encodeURIComponent(command)}`,
+  },
   time: {
     patterns: [/current time|time/i],
     response: () => {
