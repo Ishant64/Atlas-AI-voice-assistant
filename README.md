@@ -1,2 +1,2 @@
 # Atlas-AI-voice-assistant
-This is my atlas created by HTML,CSS and javascript for my project in 8th standard
+This is my AI assistant atlas created by HTML,CSS and javascript for my project in 8th standard
