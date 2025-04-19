@@ -96,11 +96,15 @@ function takeCommand(message) {
     }
 
     // -------------------- ⏰ Date & Time Commands --------------------
-  } else if (message.includes("what's the time") || message.includes("time")) {
-    let time = new Date().toLocaleTimeString();
+   } else if (message.includes("what's the time") || message.includes("time")) {
+    let time = new Date().toLocaleTimeString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    });
     speak(`It is ${time}`);
   } else if (message.includes("what's the date") || message.includes("date")) {
-    let date = new Date().toLocaleDateString();
+    let date = new Date().toLocaleDateString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    });
     speak(`Today's date is ${date}`);
   } else if (message.includes("set a timer for")) {
     let minutes = message.match(/\d+/);
