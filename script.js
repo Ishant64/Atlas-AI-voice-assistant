@@ -1,12 +1,16 @@
+let btn = document.getElementById("btn");
+
+// Setting up speech synthesis function
 function speak(text) {
   let text_speak = new SpeechSynthesisUtterance(text);
   text_speak.rate = 1;
   text_speak.pitch = 1;
   text_speak.volume = 1;
-  text_speak.lang = "hi-GB"; // Hindi accent English
+  text_speak.lang = "hi-GB";
   window.speechSynthesis.speak(text_speak);
 }
 
+// Setting up speech recognition
 let speechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new speechRecognition();
@@ -16,14 +20,20 @@ btn.addEventListener("click", () => {
   recognition.start();
 });
 
+// When speech is recognized
 recognition.onresult = (event) => {
   let transcript = event.results[event.resultIndex][0].transcript.toLowerCase();
   takeCommand(transcript);
 };
 
+// Function to handle commands
 function takeCommand(message) {
   // -------------------- 💬 Greetings Commands --------------------
-  if (message.includes("hello") || message.includes("hey")) {
+  if (
+    message.includes("hello atlas") ||
+    message.includes("hey atlas") ||
+    message.includes("hello")
+  ) {
     speak("Hey there, Ishant! How can I help you?");
   } else if (message.includes("who are you")) {
     speak("I’m Atlas, your personal voice assistant created by Ishant Kumar.");
@@ -70,33 +80,33 @@ function takeCommand(message) {
     }
 
     // -------------------- 🔍 Search Commands -------------------------
-    if (message.includes("search for")) {
-      let query = message.replace("search for", "").trim();
-      window.open(
-        `https://www.google.com/search?q=${encodeURIComponent(query)}`,
-        "_blank"
-      );
-      speak(`Searching Google for ${query}`);
-    } else if (message.includes("open youtube for")) {
-      let query = message.replace("openingd youtube for", "").trim();
-      window.open(
-        `https://www.youtube.com/results?search_query=${encodeURIComponent(
-          query
-        )}`,
-        "_blank"
-      );
-      speak(`Searching YouTube for ${query}`);
-    } else if (message.includes("search wikipedia")) {
-      let query = message.replace("search wikipedia for", "").trim();
-      window.open(
-        `https://en.wikipedia.org/wiki/${encodeURIComponent(query)}`,
-        "_blank"
-      );
-      speak(`Searching Wikipedia for ${query}`);
-    }
+  } else if (message.includes("search for")) {
+    let query = message.replace("search for", "").trim();
+    window.open(
+      `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+      "_blank"
+    );
+    speak(`Searching Google for ${query}`);
+  } else if (message.includes("open youtube for")) {
+    let query = message.replace("opening youtube for", "").trim();
+    window.open(
+      `https://www.youtube.com/results?search_query=${encodeURIComponent(
+        query
+      )}`,
+      "_blank"
+    );
+    speak(`Searching YouTube for ${query}`);
+  } else if (message.includes("search wikipedia")) {
+    let query = message.replace("search wikipedia for", "").trim();
+    window.open(
+      `https://en.wikipedia.org/wiki/${encodeURIComponent(query)}`,
+      "_blank"
+    );
+    speak(`Searching Wikipedia for ${query}`);
+  }
 
-    // -------------------- ⏰ Date & Time Commands --------------------
-   } else if (message.includes("what's the time") || message.includes("time")) {
+  // -------------------- ⏰ Date & Time Commands --------------------
+  else if (message.includes("what's the time") || message.includes("time")) {
     let time = new Date().toLocaleTimeString("en-IN", {
       timeZone: "Asia/Kolkata",
     });
@@ -175,10 +185,19 @@ function takeCommand(message) {
 
   // -------------------- ❓ Fallback --------------------
   else {
-    speak("I understand that command. Let me search it for you on Google.");
-    window.open(
-      `https://www.google.com/search?q=${encodeURIComponent(message)}`,
-      "_blank"
-    );
+    if (typeof puter !== "undefined" && puter.ai && puter.ai.chat) {
+      speak("Let me think about that...");
+      puter.ai
+        .chat(message)
+        .then((aiReply) => {
+          speak(aiReply);
+        })
+        .catch((err) => {
+          console.error(err);
+          speak("Sorry, I couldn't find an answer.");
+        });
+    } else {
+      speak("The AI service is not available. Please try again later.");
+    }
   }
 }
